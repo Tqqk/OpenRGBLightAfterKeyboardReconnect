@@ -41,6 +41,7 @@ A. You can run the script using python
 <br/>
 
 B. You can run the script/program by creating .exe file
+  - Download or copy the python script
   - Use the command `pyinstaller -w --onefile --noconsole PROGRAM_NAME.py` to create the .exe file (Don't forget to use the `-w --onefile --noconsole` attributes to run the program without any console window)
 
 
