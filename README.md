@@ -1,5 +1,5 @@
 # OpenRGB Light After Keyboard Reconnect
-This python script restarts the OpenRGB software (https://openrgb.org) when you reconnect your keyboard.
+By default OpenRGB doesn't automatically rescan after you reconnect your keyboard. So when you have a keyboard which doesn't have a memory for the RGB profile, then if you reconnect your keyboard (for me it's disconecting my laptop from docking station and connecting it after few hours), the OpenRGB software doesn't detect the reconnect and you need to open OpenRGB, click on rescan and then load profile. That's why I've made this python script restarts the OpenRGB software (https://openrgb.org) when you reconnect your keyboard.
 
 <br/>
 
