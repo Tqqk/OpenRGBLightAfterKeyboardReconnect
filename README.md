@@ -1,7 +1,7 @@
 # OpenRGBLightAfterKeyboardReconnect
 This python script restarts the OpenRGB software (https://openrgb.org) when you reconnect your keyboard.
 
-## How to use the script
+## How to modify the script
 1. Replace the `C:/PATH_TO_DEVCON/devcon.exe` (line 5) with your own path to the devcon.exe file
     - You will need the **devcon.exe**. It's included in WDK and you can download it at microsoft's website (https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon) 
   
