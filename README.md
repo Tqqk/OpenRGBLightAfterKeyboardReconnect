@@ -1,4 +1,4 @@
-# OpenRGBLightAfterKeyboardReconnect
+# OpenRGB Light After Keyboard Reconnect
 This python script restarts the OpenRGB software (https://openrgb.org) when you reconnect your keyboard.
 
 ## How to modify the script
