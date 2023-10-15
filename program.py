@@ -1,42 +1,51 @@
 import subprocess
 import time
 
-# Path to the defcon file (you can download it at microsoft's website) - replace the "C:/PATH_TO_DEVCON/devcon.exe" with your own path to the devcon.exe
-devcon_path = r"C:/PATH_TO_DEVCON/devcon.exe"
+profile_name = "PROFILE_NAME"
 
-# Device ID of your keyboard, can be found in device manager -> KEYBOARDS -> disconnect your keyboard to find out which keyboard dissapears and which doesn't -> click on the keyboard that dissapeared when disconnected -> click on DETAILS -> find HARDWARE IDS in the dropdown menu -> copy the top one (if it doesn't work try the others) - replace "KEYBOARD_ID" with your own keyboard ID
-keyboard_id = "KEYBOARD_ID"
+# Variables
+openrgb_path = "OpenRGB.exe"  
+devcon_path = "devcon.exe"
+keyboard_class = "HIDClass"
+mouse_class = "Mouse"
 
-# Initial state of keyboard
-keyboard_connected = True
-
-# Create startupinfo object
 startupinfo = subprocess.STARTUPINFO()
 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 startupinfo.wShowWindow = subprocess.SW_HIDE
 
-while True:
-    devcon_find_cmd = [devcon_path, 'status', keyboard_id]
-
+def count_hid_devices(device_class):
     try:
-        output = subprocess.check_output(devcon_find_cmd, universal_newlines=True, startupinfo=startupinfo)
-        if "No matching devices found" in output:
-            if keyboard_connected:
-                
-                keyboard_connected = False
-        else:
-            if not keyboard_connected:
-                
-                keyboard_connected = True
-                
-                # Kill the OpenRGB task
-                subprocess.run('taskkill /IM OpenRGB.exe /F', startupinfo=startupinfo)
-
-                # Start the OpenRGB program with the desired attributes - replace the "C:\\PATH_TO_OPENRGB\\OpenRGB.exe" with you own OpenRGB.exe path and replace the "RGB_PROFILE_NAME" to the name of your profile in OpenRGB.
-
-                process = subprocess.Popen(['C:\\PATH_TO_OPENRGB\\OpenRGB.exe', '--startminimized', '--profile', 'RGB_PROFILE_NAME'], stderr=subprocess.PIPE, startupinfo=startupinfo)
-
+        # Devices counted by devcon
+        process = subprocess.Popen([devcon_path, 'find', '='+device_class], stdout=subprocess.PIPE, universal_newlines=True, startupinfo=startupinfo)
+        device_count = sum(1 for _ in process.stdout) 
+        process.stdout.close()
+        return device_count
     except subprocess.CalledProcessError as e:
         print("Error running devcon:", e)
+        return 0
 
-    time.sleep(1)
+def start_openrgb():
+    # Restart OpenRGB
+    subprocess.run(['taskkill', '/IM', openrgb_path, '/F'], startupinfo=startupinfo)
+
+    print('Starting OpenRGB...')
+    subprocess.Popen([openrgb_path, '--startminimized', '--profile', profile_name], stderr=subprocess.PIPE, startupinfo=startupinfo)
+
+# Device counts
+prev_hid_device_count = count_hid_devices(keyboard_class) + count_hid_devices(mouse_class)
+
+while True:
+    # HID device counts
+    current_hid_device_count = count_hid_devices(keyboard_class) + count_hid_devices(mouse_class)
+
+    # Debug
+    print("Current HID device count:", current_hid_device_count)
+
+    # HID device count change
+    if current_hid_device_count != prev_hid_device_count:
+        
+        print("HID device count changed. Restarting OpenRGB.")
+        start_openrgb()  
+
+    prev_hid_device_count = current_hid_device_count
+    time.sleep(2)
