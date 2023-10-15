@@ -5,44 +5,26 @@ By default OpenRGB doesn't automatically rescan after you reconnect your keyboar
 
 
 ## How to modify the script
-1. Replace the `C:/PATH_TO_DEVCON/devcon.exe` (line 5) with your own path to the devcon.exe file
-    - You will need the **devcon.exe**. It's included in WDK and you can download it at microsoft's website (https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon) 
+1. - You will need to obtain the **devcon.exe** 
+(It's included in WDK and you can download it at Microsoft's website https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon) 
+   - After you've downloaded the WDK, copy the **devcon.exe** to the same folder as the **OpenRGB.exe** file. (root folder of OpenRGB)
   
-
 <br/>
 
-2. Replace the `KEYBOARD_ID` (line 8) with your own keyboard ID 
-   - You will need to get the **Hardware ID** of your keyboard 
-       - Open **Device Manager**
-     - Click on **Keyboards**
-     - Find your keyboard (There may be more of them. It's the one that dissapears when you disconnect your keyboard)
-     - Right-click the device and select **Properties**
-     - Select the **Details** tab
-     - In the **Property** dropdown menu select **Hardware Ids**
-     - Choose the ID at the top (If it doesn't work try the other IDs)
-    
- 
- <br/>
-  
-3. Replace the `C:\\PATH_TO_OPENRGB\\OpenRGB.exe` (line 37) with our own path to the OpenRGB software
-
-
-<br/>
-
-4. Replace the `RGB_PROFILE_NAME` (line 37) with our own profile name in the OpenRGB software
+2. Replace the `PROFILE_NAME` (line 4) with our own profile name in the OpenRGB software
 
 <br/>
 <br/>
 
 ## How to run the script/program
 A. You can run the script using python 
-  - Use the command `python PROGRAM_NAME.py` to run the program
+  - Use the command `python program.py` to run the program, but that's going to run with a command line open, so that's not ideal (I recommend the option **B.**)
 
 <br/>
 
 B. You can run the script/program by creating .exe file
   - Download or copy the python script
-  - Use the command `pyinstaller -w --onefile --noconsole PROGRAM_NAME.py` to create the .exe file (Don't forget to use the `-w --onefile --noconsole` attributes to run the program without any console window)
+  - Use the command `pyinstaller -w --onefile --noconsole program.py` to create the .exe file (Don't forget to use the `-w --onefile --noconsole` attributes to run the program without any console window)
 
 
 <br/>
