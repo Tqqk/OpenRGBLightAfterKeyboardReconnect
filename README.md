@@ -8,7 +8,7 @@ By default OpenRGB doesn't automatically rescan after you reconnect your keyboar
 1. - You will need to obtain the **devcon.exe** 
 (It's included in WDK and you can download it at Microsoft's website https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon) 
    - After you've downloaded the WDK, copy the **devcon.exe** to the same folder as the **OpenRGB.exe** file. (root folder of OpenRGB)
-  
+   - You can then delete the rest of the toolkit
 <br/>
 
 2. Replace the `PROFILE_NAME` (line 4) with our own profile name in the OpenRGB software
