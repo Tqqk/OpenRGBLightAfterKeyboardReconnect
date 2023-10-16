@@ -42,9 +42,8 @@ while True:
     print("Current HID device count:", current_hid_device_count)
 
     # HID device count change
-    if current_hid_device_count != prev_hid_device_count:
-        
-        print("HID device count changed. Restarting OpenRGB.")
+    if current_hid_device_count > prev_hid_device_count:
+        print("HID device count increased. Restarting OpenRGB.")
         start_openrgb()  
 
     prev_hid_device_count = current_hid_device_count

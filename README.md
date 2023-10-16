@@ -43,7 +43,10 @@ B. You can run the script/program by creating .exe file
 2. Find the .exe and click on End Task
 3. If you have it in the Startup folder, then remove it
 
+<br/>
+<br/>
 
+####  v2.2
 
 
 
